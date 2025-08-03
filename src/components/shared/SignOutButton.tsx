@@ -4,6 +4,7 @@ import { Button } from '../ui/button'
 import { authClient } from '@/lib/auth-client'
 import WithPending from './WithPending'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 export default function SignOutButton() {
   const [isPending, startTransition] = useTransition()
@@ -11,8 +12,18 @@ export default function SignOutButton() {
 
   const handleClick = async () => {
     startTransition(async () => {
-      await authClient.signOut()
-      router.push('/')
+      await authClient.signOut({
+        fetchOptions: {
+          onError: (ctx) => {
+            console.log(ctx.error.message)
+            toast.error('Something went wrong!')
+          },
+          onSuccess: () => {
+            toast.error('Successfully logged out!')
+            router.push('/')
+          },
+        },
+      })
     })
   }
 

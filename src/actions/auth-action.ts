@@ -1,34 +1,43 @@
 'use server'
 
-import { verifyUser } from '@/dal/require-user'
+import { auth } from '@/lib/auth'
 import { actionClient } from '@/lib/safe-action'
 import {
-  registerFormSchema,
   loginFormSchema,
+  registerFormSchema,
 } from '@/lib/validation/auth-valid'
-
-import { auth } from '@/lib/auth'
+import { headers } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 export const registerUserAction = actionClient
   .inputSchema(registerFormSchema)
   .action(async ({ parsedInput: { email, password, repeatPassword } }) => {
     if (password !== repeatPassword) {
-      return { isError: true, message: 'Passwords must match' }
+      throw new Error('Passwords should be equal!')
     }
-    const result = await auth.api.signUpEmail({
+
+    await auth.api.signUpEmail({
       body: {
+        name: email.split('@')[0] || 'user',
         email,
         password,
-        name: email.split('@')[0] || 'test',
-        callbackURL: 'https://example.com/callback',
       },
     })
+
+    redirect('/profile')
   })
 
 export const loginUserAction = actionClient
   .inputSchema(loginFormSchema)
   .action(async ({ parsedInput: { email, password } }) => {
-    const user = await verifyUser()
+    await auth.api.signInEmail({
+      body: {
+        email,
+        password,
+        rememberMe: true,
+      },
+      headers: await headers(),
+    })
 
-    return user
+    redirect('/profile')
   })

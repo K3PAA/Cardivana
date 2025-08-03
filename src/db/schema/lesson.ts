@@ -8,7 +8,7 @@ export const visibilityEnum = pgEnum('visibility', ['public', 'private'])
 export const lesson = pgTable('lesson', {
   id: t.uuid('id').defaultRandom().primaryKey(),
   userId: t
-    .text('user_id')
+    .uuid('user_id')
     .notNull()
     .references(() => user.id, { onDelete: 'cascade' }),
   title: t.varchar('title', { length: 256 }).notNull(),
@@ -27,7 +27,7 @@ export const lessonReview = pgTable('lesson_review', {
     .notNull()
     .references(() => lesson.id, { onDelete: 'cascade' }),
   userId: t
-    .text('user_id')
+    .uuid('user_id')
     .notNull()
     .references(() => user.id, { onDelete: 'cascade' }),
   title: t.varchar('title', { length: 256 }).notNull(),
@@ -41,7 +41,7 @@ export const userBookmarkLesson = pgTable(
   'user_bookmark_lesson',
   {
     userId: t
-      .text('user_id')
+      .uuid('user_id')
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
     lessonId: t
@@ -62,7 +62,7 @@ export const userFavoriteLesson = pgTable(
   'user_favorite_lesson',
   {
     userId: t
-      .text('user_id')
+      .uuid('user_id')
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
     lessonId: t

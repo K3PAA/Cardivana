@@ -56,7 +56,7 @@ export default async function page() {
         </Button>
 
         <p className='text-muted-foreground col-span-full text-sm'>
-          Don't have an account yet ? Click here to
+          Don&apos;t have an account yet ? Click here to
           <Button variant='link' className='px-2'>
             <Link href='register'> register</Link>
           </Button>

@@ -3,6 +3,7 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { db } from '@/db'
 
 import * as authSchema from '@/db/schema/auth'
+import { nextCookies } from 'better-auth/next-js'
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -11,6 +12,12 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
-    autoSignIn: true,
+    autoSignIn: true, // false, -> user will be created on register page but you won't be signed in automatically, we need to sign in on separate page
   },
+  advanced: {
+    database: {
+      generateId: false,
+    },
+  },
+  plugins: [nextCookies()],
 })

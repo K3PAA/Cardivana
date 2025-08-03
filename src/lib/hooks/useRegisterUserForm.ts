@@ -1,14 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useAction } from 'next-safe-action/hooks'
 import { useForm } from 'react-hook-form'
 
 import { RegisterForm } from '@/lib/types'
-
 import { registerFormSchema } from '../validation/auth-valid'
-
-import { useTransition } from 'react'
-import { toast } from 'sonner'
-import { authClient } from '../auth-client'
-import { useRouter } from 'next/navigation'
+import { registerUserAction } from '@/actions/auth-action'
 
 const defaultValues: RegisterForm = {
   email: '',
@@ -17,8 +13,7 @@ const defaultValues: RegisterForm = {
 }
 
 export const useRegisterUserForm = () => {
-  const router = useRouter()
-  const [isPending, startTransition] = useTransition()
+  const { executeAsync, isPending } = useAction(registerUserAction)
 
   const form = useForm<RegisterForm>({
     resolver: zodResolver(registerFormSchema),
@@ -26,20 +21,7 @@ export const useRegisterUserForm = () => {
   })
 
   async function onSubmit(values: RegisterForm) {
-    startTransition(async () => {
-      const { data, error } = await authClient.signUp.email({
-        name: values.email.split('@')[0] || 'user',
-        email: values.email,
-        password: values.password,
-      })
-
-      if (error) {
-        console.log(error.message)
-        toast.error('Something went wrong!')
-      } else {
-        router.push('/profile')
-      }
-    })
+    await executeAsync(values)
   }
 
   return {

@@ -7,7 +7,10 @@ import { user } from '@/db/schema/auth'
 
 export const flashcard = pgTable('flashcard', {
   id: t.uuid().defaultRandom().primaryKey(),
-  userId: t.text('user_id').references(() => user.id),
+  userId: t
+    .uuid('user_id')
+    .notNull()
+    .references(() => user.id),
   lessonId: t.uuid('lesson_id').references(() => lesson.id),
 
   front: t.jsonb().$type<FlashcardFace>(),
