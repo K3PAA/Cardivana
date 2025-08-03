@@ -11,11 +11,11 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { useRegisterUserForm } from '@/lib/hooks/useRegisterUserForm'
+import { useLoginUserForm } from '@/lib/hooks/useLoginUserForm'
 import PasswordInput from '../../_components/PasswordInput'
 
-export default function RegisterForm() {
-  const { form, handleSubmit, isPending } = useRegisterUserForm()
+export default function LoginForm() {
+  const { form, handleSubmit, isPending } = useLoginUserForm()
 
   return (
     <Form {...form}>
@@ -48,22 +48,8 @@ export default function RegisterForm() {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name='repeatPassword'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Repeat Password</FormLabel>
-              <FormControl>
-                <PasswordInput field={field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         <Button type='submit' className='w-full' disabled={isPending}>
-          <WithPending isPending={isPending}>create an account</WithPending>
+          <WithPending isPending={isPending}>login to application</WithPending>
         </Button>
       </form>
     </Form>
