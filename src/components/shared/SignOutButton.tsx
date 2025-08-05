@@ -6,7 +6,11 @@ import WithPending from './WithPending'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
-export default function SignOutButton() {
+type SignOutButtonProps = {
+  className?: string
+}
+
+export default function SignOutButton({ className }: SignOutButtonProps) {
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
 
@@ -28,7 +32,12 @@ export default function SignOutButton() {
   }
 
   return (
-    <Button onClick={handleClick} variant='destructive' disabled={isPending}>
+    <Button
+      onClick={handleClick}
+      variant='destructive'
+      disabled={isPending}
+      className={className}
+    >
       <WithPending isPending={isPending}>Sign Out</WithPending>
     </Button>
   )

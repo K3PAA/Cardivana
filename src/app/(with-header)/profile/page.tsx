@@ -9,10 +9,9 @@ export default async function page() {
   })
 
   if (!session) return <p>Unauthorized</p>
+
   return (
     <div>
-      <h1>Profile</h1>
-      <SignOutButton />
       <pre className='text-small overflow-clip'>
         {JSON.stringify(session, null, 2)}
       </pre>

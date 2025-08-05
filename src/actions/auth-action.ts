@@ -6,6 +6,7 @@ import {
   loginFormSchema,
   registerFormSchema,
 } from '@/lib/validation/auth-valid'
+import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
@@ -24,6 +25,7 @@ export const registerUserAction = actionClient
       },
     })
 
+    revalidatePath('/profile')
     redirect('/profile')
   })
 
@@ -39,5 +41,6 @@ export const loginUserAction = actionClient
       headers: await headers(),
     })
 
+    revalidatePath('/', 'layout')
     redirect('/profile')
   })

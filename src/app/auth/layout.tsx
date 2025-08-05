@@ -7,9 +7,9 @@ import { ReactNode } from 'react'
 
 export default function layout({ children }: { children: ReactNode }) {
   return (
-    <Wrapper className='relative mt-12 grid place-content-center'>
+    <Wrapper className='relative mt-16 grid place-content-center'>
       <div className='flex justify-between'>
-        <Logo className='mb-12 text-center' />
+        <Logo className='mb-8 text-center' />
 
         <Button variant='secondary' asChild>
           <Link href='/'>
@@ -18,6 +18,7 @@ export default function layout({ children }: { children: ReactNode }) {
           </Link>
         </Button>
       </div>
+
       {children}
 
       <div className='text-muted-foreground mt-4 text-center text-sm text-balance'>

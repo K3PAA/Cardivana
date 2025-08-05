@@ -12,14 +12,15 @@ const defaultValues: LoginForm = {
 }
 
 export const useLoginUserForm = () => {
-  const { executeAsync, isPending } = useAction(loginUserAction)
+  const { execute, isPending } = useAction(loginUserAction)
 
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginFormSchema),
     defaultValues,
   })
+
   async function onSubmit(values: LoginForm) {
-    executeAsync(values)
+    execute(values)
   }
 
   return {

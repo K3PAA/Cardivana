@@ -13,7 +13,7 @@ const defaultValues: RegisterForm = {
 }
 
 export const useRegisterUserForm = () => {
-  const { executeAsync, isPending } = useAction(registerUserAction)
+  const { execute, isPending } = useAction(registerUserAction)
 
   const form = useForm<RegisterForm>({
     resolver: zodResolver(registerFormSchema),
@@ -21,7 +21,7 @@ export const useRegisterUserForm = () => {
   })
 
   async function onSubmit(values: RegisterForm) {
-    await executeAsync(values)
+    execute(values)
   }
 
   return {

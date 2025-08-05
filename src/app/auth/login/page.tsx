@@ -9,30 +9,29 @@ import {
 import { Separator } from '@/components/ui/separator'
 
 import { RiGithubFill, RiGoogleFill } from '@remixicon/react'
-import RegisterForm from './_components/RegisterForm'
 import Link from 'next/link'
+import LoginForm from './_components/LoginForm'
+import { auth } from '@/lib/auth'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { auth } from '@/lib/auth'
 
 export default async function page() {
   const session = await auth.api.getSession({
     headers: await headers(),
   })
-
   if (session) redirect('/')
 
   return (
     <Card className='w-full max-w-md'>
       <CardHeader>
-        <CardTitle className='text-center text-2xl'>Register</CardTitle>
+        <CardTitle className='text-center text-2xl'>Login</CardTitle>
       </CardHeader>
 
       <CardContent>
-        <RegisterForm />
+        <LoginForm />
       </CardContent>
 
-      <CardFooter className='grid gap-2 sm:grid-cols-2'>
+      <CardFooter className='grid grid-cols-2 gap-2'>
         <div className='relative col-span-full flex h-5 items-center justify-center text-center'>
           <p className='bg-card text-muted-foreground relative z-10 px-2 text-sm'>
             or continue with
@@ -56,10 +55,10 @@ export default async function page() {
           Login with GitHub
         </Button>
 
-        <p className='text-muted-foreground col-span-full text-center text-sm'>
-          Already have an account ? Click here to
-          <Button variant='link' className='px-2' asChild>
-            <Link href='/login'>login</Link>
+        <p className='text-muted-foreground col-span-full text-sm'>
+          Don&apos;t have an account yet ? Click here to
+          <Button variant='link' className='px-2'>
+            <Link href='/auth/register'> register</Link>
           </Button>
         </p>
       </CardFooter>
