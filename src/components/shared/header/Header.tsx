@@ -19,8 +19,8 @@ const navLinks = [
     label: 'Explore Lessons',
   },
   {
-    href: '/library',
-    label: 'library',
+    href: '/collection',
+    label: 'My Collection',
   },
   {
     href: '/profile',
@@ -69,7 +69,11 @@ export default function Header() {
           </Link>
         </div>
 
-        <nav className={cn('flex w-full flex-row-reverse items-center')}>
+        <nav
+          className={cn(
+            'bg-background flex w-full flex-row-reverse items-center',
+          )}
+        >
           <div className='flex items-center gap-2'>
             <AuthButtons className='hidden sm:flex' />
             <ThemeToggle />
@@ -81,7 +85,7 @@ export default function Header() {
             id='primary-navigation'
             data-state={state}
             className={cn(
-              'top-navigation-height bg-background fixed left-0 flex w-full flex-col gap-2 overflow-auto border-b p-4 md:static md:h-auto md:translate-0 md:flex-row md:border-b-0 md:py-0 md:opacity-100',
+              'top-navigation-height bg-background fixed left-0 z-100 flex w-full flex-col gap-2 overflow-auto border-b p-4 md:static md:h-auto md:translate-0 md:flex-row md:border-b-0 md:py-0 md:opacity-100',
             )}
           >
             {navLinks.map((link) => {

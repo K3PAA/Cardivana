@@ -1,15 +1,13 @@
 import 'server-only'
 import { cache } from 'react'
 import { redirect } from 'next/navigation'
-import { sleep } from '@/lib/utils'
+import { auth } from '@/lib/auth'
+import { headers } from 'next/headers'
 
 export const verifyUser = cache(async () => {
-  await sleep(5000)
-  const user = { name: 'test' }
-
-  if (!user) {
-    redirect('/login')
-  }
-
-  return user
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  })
+  if (!session) redirect('/auth/login')
+  return session
 })
