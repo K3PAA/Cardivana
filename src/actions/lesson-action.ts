@@ -10,6 +10,7 @@ export const createLessonAction = actionClient
   .inputSchema(createLessonOutputSchema)
   .action(async ({ parsedInput }) => {
     const session = await verifyUser()
+    console.log(parsedInput)
 
     const lessonWithSameName = await db.query.lesson.findMany({
       where: (lesson, { eq }) => eq(lesson.title, parsedInput.title),
@@ -20,6 +21,6 @@ export const createLessonAction = actionClient
       ...parsedInput,
       userId: session.user.id,
       slug,
-      tags: parsedInput.tags.map((value) => value.toUpperCase()),
+      tags: parsedInput.tags.map((value) => value.tag),
     })
   })

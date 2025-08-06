@@ -10,7 +10,7 @@ const defaultValues: CreateLessonFormInput = {
   title: '',
   description: '',
   visibility: 'public',
-  tags: ['test'],
+  tags: [],
   price: '0',
   flashcards: [],
 } as const
@@ -23,10 +23,14 @@ export const useCreateLessonForm = () => {
     defaultValues,
   })
 
-  const { fields, append, remove } = useFieldArray({
+  const tagFieldArray = useFieldArray({
     control: form.control,
-    // @ts-ignore, some bug ?
     name: 'tags',
+  })
+
+  const flashcardFieldArray = useFieldArray({
+    control: form.control,
+    name: 'flashcards',
   })
 
   async function onSubmit(values: CreateLessonFormInput) {
@@ -35,9 +39,8 @@ export const useCreateLessonForm = () => {
 
   return {
     form,
-    fields,
-    append,
-    remove,
+    tagFieldArray,
+    flashcardFieldArray,
     handleSubmit: form.handleSubmit(onSubmit),
     isPending,
   }
