@@ -8,10 +8,10 @@ import { Textarea } from '@/components/ui/textarea'
 import { useCreateLessonForm } from '@/lib/hooks/useCreateLessonForm'
 
 import FormFieldWrapper from './FormFieldWrapper'
-import PriceInputWrapper from './PriceInputWrapper'
-import VisibilitySelect from './VisibilitySelect'
-import FlashcardFieldArray from './FlashcardFieldArray'
-import TagFieldArray from './TagFieldArray'
+import PriceInputWrapper from './lesson/PriceInputWrapper'
+import VisibilitySelect from './lesson/VisibilitySelect'
+import FlashcardFieldArray from './flashcard/FlashcardFieldArray'
+import TagFieldArray from './lesson/TagFieldArray'
 
 export default function CreateForm() {
   const { form, handleSubmit, isPending, tagFieldArray, flashcardFieldArray } =
@@ -65,7 +65,10 @@ export default function CreateForm() {
           control={form.control}
           name='description'
           render={({ field }) => (
-            <FormFieldWrapper label='Lesson Description' className='col-span-4'>
+            <FormFieldWrapper
+              label='Lesson Description'
+              className='col-span-4 self-start'
+            >
               <FormControl>
                 <Textarea
                   placeholder='What is your lesson about...'
@@ -78,7 +81,10 @@ export default function CreateForm() {
 
         <TagFieldArray tagFieldArray={tagFieldArray} control={form.control} />
 
-        <FlashcardFieldArray flashcardFieldArray={flashcardFieldArray} />
+        <FlashcardFieldArray
+          flashcardFieldArray={flashcardFieldArray}
+          control={form.control}
+        />
 
         <Button type='submit' className='w-full' disabled={isPending}>
           <WithPending isPending={isPending}>Create lessons</WithPending>

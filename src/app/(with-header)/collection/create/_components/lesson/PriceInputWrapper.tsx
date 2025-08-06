@@ -1,4 +1,3 @@
-import { Input } from '@/components/ui/input'
 import { ReactNode } from 'react'
 
 type PriceInputWrapperProps = {

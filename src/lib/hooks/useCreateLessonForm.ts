@@ -10,9 +10,27 @@ const defaultValues: CreateLessonFormInput = {
   title: '',
   description: '',
   visibility: 'public',
-  tags: [],
+  tags: [{ tag: 'book' }, { tag: 'B2' }],
   price: '0',
-  flashcards: [],
+  flashcards: [
+    {
+      front: {
+        text: 'Conceivable',
+        definition: 'That you can imagine or believe',
+        example: "It is conceivable that I'll see her tomorrow",
+        synonyms: [{ text: 'Possible' }],
+        antonyms: [{ text: 'Inconceivable' }],
+      },
+      back: {
+        text: 'Wyobrażalny ',
+        definition: '',
+        example: '',
+        synonyms: [{ text: 'Możliwy' }],
+        antonyms: [{ text: 'Niewyobrażalny' }],
+      },
+      difficulty: 'medium',
+    },
+  ],
 } as const
 
 export const useCreateLessonForm = () => {

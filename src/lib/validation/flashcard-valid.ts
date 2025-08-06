@@ -1,11 +1,19 @@
 import z from 'zod'
 
 export const flashcardFaceSchema = z.object({
-  text: z.string().min(1),
+  text: z.string().min(1, "Can't be empty"),
   example: z.string(),
   definition: z.string(),
-  synonyms: z.string().array(),
-  antonyms: z.string().array(),
+  synonyms: z.array(
+    z.object({
+      text: z.string().min(1, 'Min 1 character').max(16, 'Max 25 characters.'),
+    }),
+  ),
+  antonyms: z.array(
+    z.object({
+      text: z.string().min(1, 'Min 1 character').max(16, 'Max 25 characters.'),
+    }),
+  ),
 })
 
 export const falshcardSchema = z.object({
