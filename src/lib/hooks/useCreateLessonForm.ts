@@ -12,6 +12,7 @@ const defaultValues: CreateLessonFormInput = {
   visibility: 'public',
   tags: ['test'],
   price: '0',
+  flashcards: [],
 } as const
 
 export const useCreateLessonForm = () => {

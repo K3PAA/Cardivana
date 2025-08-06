@@ -8,6 +8,14 @@ import { timeStamp } from 'console'
 
 export const entryStatusEnum = pgEnum('status', ['success', 'fail'])
 
+export const difficultyEnum = pgEnum('difficulty', [
+  'easy',
+  'normal',
+  'medium',
+  'hard',
+  'extreme',
+])
+
 export const flashcard = pgTable('flashcard', {
   id: t.uuid().defaultRandom().primaryKey(),
   userId: t
@@ -18,6 +26,7 @@ export const flashcard = pgTable('flashcard', {
 
   front: t.jsonb().$type<FlashcardFace>(),
   back: t.jsonb().$type<FlashcardFace>(),
+  difficulty: difficultyEnum().notNull().default('medium'),
 
   ...timestamps,
 })

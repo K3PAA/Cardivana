@@ -40,7 +40,7 @@ export default function page() {
               {items.map((item) => (
                 <div
                   key={`${id}-${item.value}`}
-                  className='border-input has-data-[state=checked]:border-primary/75 has-data-[state=checked]:bg-background/5 relative flex cursor-pointer gap-2 rounded-md border-2 p-4 shadow-xs outline-none'
+                  className='border-input has-data-[state=checked]:border-primary/75 has-data-[state=checked]:bg-background/5 relative flex cursor-pointer gap-2 rounded-md border p-2 shadow-xs outline-none'
                 >
                   <div className='flex justify-between gap-2'>
                     <Checkbox

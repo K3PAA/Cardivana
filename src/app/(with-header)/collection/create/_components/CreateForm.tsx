@@ -22,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { PlusIcon, Trash } from 'lucide-react'
 
 export default function CreateForm() {
   const { form, handleSubmit, isPending, fields, append, remove } =
@@ -29,34 +30,22 @@ export default function CreateForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit} className='space-y-4'>
+      <form
+        onSubmit={handleSubmit}
+        className='grid grid-cols-7 gap-6 space-y-1'
+      >
         <FormField
           control={form.control}
           name='title'
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Lesson Title</FormLabel>
+            <FormItem className='col-span-4'>
+              <div className='flex justify-between'>
+                <FormLabel>Lesson Title</FormLabel>
+                <FormMessage />
+              </div>
               <FormControl>
                 <Input placeholder='shadcn' {...field} />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name='description'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Lesson Description</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder='What is your lesson about...'
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -65,7 +54,7 @@ export default function CreateForm() {
           control={form.control}
           name='price'
           render={({ field }) => (
-            <FormItem>
+            <FormItem className='col-span-2'>
               <FormLabel>Lesson Price</FormLabel>
 
               <FormControl>
@@ -88,9 +77,9 @@ export default function CreateForm() {
               </FormControl>
 
               <FormMessage />
-              <FormDescription>
+              {/* <FormDescription>
                 To be able to change the price you have to be paid user.
-              </FormDescription>
+              </FormDescription> */}
             </FormItem>
           )}
         />
@@ -109,7 +98,7 @@ export default function CreateForm() {
                   {...field}
                 >
                   <FormControl>
-                    <SelectTrigger id={'t2342'}>
+                    <SelectTrigger id={'t2342'} className='w-full'>
                       <SelectValue placeholder='Select visibility' />
                     </SelectTrigger>
                   </FormControl>
@@ -122,52 +111,79 @@ export default function CreateForm() {
               </div>
 
               <FormMessage />
-              <FormDescription>
-                To be able to change the visibility you have to be paid user.
-              </FormDescription>
             </FormItem>
           )}
         />
 
-        <div className='space-y-4'>
-          <FormLabel>Tags</FormLabel>
-          {fields.map((field, index) => (
-            <FormField
-              key={field.id}
-              control={form.control}
-              name={`tags.${index}`}
-              render={({ field }) => (
-                <FormItem className='flex items-center gap-2'>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder='Enter tag'
-                      className='uppercase'
-                    />
-                  </FormControl>
-                  <Button
-                    type='button'
-                    variant='destructive'
-                    size='sm'
-                    onClick={() => remove(index)}
-                  >
-                    Remove
-                  </Button>
-                </FormItem>
-              )}
-            />
-          ))}
+        <FormField
+          control={form.control}
+          name='description'
+          render={({ field }) => (
+            <FormItem className='col-span-3'>
+              <div className='flex justify-between'>
+                <FormLabel>Lesson Title</FormLabel>
+                <FormMessage />
+              </div>
+              <FormControl>
+                <Textarea
+                  placeholder='What is your lesson about...'
+                  {...field}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
 
-          <Button
-            type='button'
-            variant='secondary'
-            //@ts-ignore some bug ?
-            onClick={() => append('')}
-            className='w-full'
-          >
-            Add Tag
-          </Button>
+        <div className='col-span-4 space-y-4'>
+          <div className='grid grid-cols-[1fr_auto]'>
+            <FormLabel>Lesson Tags</FormLabel>
+            <Button
+              type='button'
+              variant='secondary'
+              //@ts-ignore some bug ?
+              onClick={() => append('')}
+              className='w-full'
+            >
+              <PlusIcon />
+              Add Tag
+            </Button>
+          </div>
+
+          <section className='grid grid-cols-3 gap-4'>
+            {fields.map((field, index) => (
+              <FormField
+                key={field.id}
+                control={form.control}
+                name={`tags.${index}`}
+                render={({ field }) => (
+                  <FormItem>
+                    <div className='flex items-center gap-0'>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder='Enter tag'
+                          className='rounded-r-none'
+                        />
+                      </FormControl>
+                      <Button
+                        type='button'
+                        variant='destructive'
+                        size='icon'
+                        className='rounded-l-none'
+                        onClick={() => remove(index)}
+                      >
+                        <Trash />
+                      </Button>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            ))}
+          </section>
         </div>
+
+        <h2>Flashcards</h2>
 
         <Button type='submit' className='w-full' disabled={isPending}>
           <WithPending isPending={isPending}>Create lessons</WithPending>

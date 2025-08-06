@@ -1,5 +1,8 @@
 import z from 'zod'
-import { flashcardFaceSchema } from './validation/flashcard'
+import {
+  falshcardSchema,
+  flashcardFaceSchema,
+} from './validation/flashcard-valid'
 import { registerFormSchema, loginFormSchema } from './validation/auth-valid'
 import {
   createLessonInputSchema,
@@ -13,3 +16,4 @@ export type CreateLessonFormInput = z.infer<typeof createLessonInputSchema>
 export type CreateLessonFormOutput = z.infer<typeof createLessonOutputSchema>
 
 export type FlashcardFace = z.infer<typeof flashcardFaceSchema>
+export type Flashcard = z.infer<typeof falshcardSchema>

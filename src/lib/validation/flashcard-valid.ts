@@ -7,3 +7,9 @@ export const flashcardFaceSchema = z.object({
   synonyms: z.string().array(),
   antonyms: z.string().array(),
 })
+
+export const falshcardSchema = z.object({
+  front: flashcardFaceSchema,
+  back: flashcardFaceSchema,
+  difficulty: z.enum(['easy', 'normal', 'medium', 'hard', 'extreme']),
+})
