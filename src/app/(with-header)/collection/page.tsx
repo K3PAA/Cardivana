@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button'
 import { PlusIcon } from 'lucide-react'
 
-import { useId } from 'react'
+import { Suspense, useId } from 'react'
 
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import Link from 'next/link'
+import CollectionLessons from './_components/CollectionLessons'
 
 const items = [
   { value: '1', label: 'Me', defaultChecked: true },
@@ -28,7 +29,14 @@ export default function page() {
               </Link>
             </Button>
           </div>
+
+          <ul>
+            <Suspense fallback={<div>Loading...</div>}>
+              <CollectionLessons />
+            </Suspense>
+          </ul>
         </main>
+
         <aside className='border-l'>
           <div className='flex h-12 items-center justify-between border-b px-4'>
             <p className='text-2xl'>Filter & Sort</p>

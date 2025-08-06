@@ -1,5 +1,5 @@
 'use server'
-import { verifyUser } from '@/dal/require-user'
+import { verifyUser } from '@/dal/verify-user'
 import { db } from '@/db'
 import { flashcard } from '@/db/schema/flashcard'
 import { lesson } from '@/db/schema/lesson'

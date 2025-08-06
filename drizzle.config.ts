@@ -9,6 +9,7 @@ export default defineConfig({
     './src/db/schema/auth.ts',
     './src/db/schema/lesson.ts',
     './src/db/schema/flashcard.ts',
+    './src/db/schema/relations.ts',
   ],
   out: './src/db/migrations',
   dbCredentials: {
