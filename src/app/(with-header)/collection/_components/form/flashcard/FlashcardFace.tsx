@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { CreateLessonFormInput } from '@/lib/types'
 import { Control, useFieldArray } from 'react-hook-form'
-import FormFieldWrapper from '../FormFieldWrapper'
+import FormFieldWrapper from '../../../_components/form/FormFieldWrapper'
 
 type FaceProps = {
   control: Control<CreateLessonFormInput, any, CreateLessonFormInput>

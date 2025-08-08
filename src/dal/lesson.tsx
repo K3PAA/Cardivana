@@ -15,3 +15,21 @@ export const getUserLessons = async () => {
 
   return lessons
 }
+
+export const getUserLessonInfo = async (lessonId: string) => {
+  const { user: activeUser } = await verifyUser()
+
+  const lesson = await db.query.lesson.findFirst({
+    where: (lesson, { eq }) => eq(lesson.id, lessonId),
+    with: {
+      flashcards: true,
+    },
+  })
+
+  if (!lesson) return { isSuccess: false, message: 'No lesson with this id' }
+
+  if (activeUser.id !== lesson.userId)
+    return { isSuccess: false, message: 'You can edit only your lesson' }
+
+  return { isSuccess: true, data: lesson }
+}

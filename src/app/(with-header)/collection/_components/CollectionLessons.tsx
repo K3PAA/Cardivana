@@ -9,6 +9,8 @@ import { PlusIcon, StarIcon } from 'lucide-react'
 import { Accordion as AccordionPrimitive } from 'radix-ui'
 import PreviewPagination from './PreviewPagination'
 import { cn } from '@/lib/utils'
+import RemoveLesson from './RemoveLesson'
+import Link from 'next/link'
 
 export default async function CollectionLessons() {
   const lessons = await getUserLessons()
@@ -24,7 +26,7 @@ export default async function CollectionLessons() {
           <AccordionItem
             value={lesson.id}
             key={lesson.id}
-            className='hover:bg-ring/15 border-boborder-border'
+            className='hover:bg-ring/5 border-boborder-border'
           >
             <AccordionPrimitive.Header className='flex'>
               <AccordionPrimitive.Trigger className='focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 cursor-pointer items-center gap-4 rounded-md p-4 text-left text-sm text-[15px] leading-6 font-semibold transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&>svg]:-order-1 [&>svg>path:last-child]:origin-center [&>svg>path:last-child]:transition-all [&>svg>path:last-child]:duration-200 [&[data-state=open]>svg]:rotate-180 [&[data-state=open]>svg>path:last-child]:rotate-90 [&[data-state=open]>svg>path:last-child]:opacity-0'>
@@ -36,9 +38,9 @@ export default async function CollectionLessons() {
                     </p>
                   </div>
                   <div>
-                    <Button variant='outline' size='icon'>
-                      <StarIcon />
-                    </Button>
+                    {Number(lesson.price) === 0
+                      ? 'free'
+                      : `${lesson.price} EUR`}
                   </div>
                 </section>
 
@@ -79,6 +81,8 @@ export default async function CollectionLessons() {
                 <h4 className='text-lg'>What words are inside this lesson ?</h4>
                 <ul className='mb-2 flex flex-wrap gap-2'>
                   {lesson.flashcards.map((card, i) => {
+                    if (!card.front?.text) return
+
                     return (
                       <li
                         key={`${card.front!.text}-${i}`}
@@ -87,13 +91,26 @@ export default async function CollectionLessons() {
                           'bg-primary/65': i % 2 == 1,
                         })}
                       >
-                        {card.front?.text}
+                        {card.front.text}
                       </li>
                     )
                   })}
                 </ul>
 
                 <PreviewPagination currentPage={0} totalPages={10} />
+              </section>
+
+              <section className='mt-4 flex justify-between gap-3'>
+                <RemoveLesson lessonId={lesson.id} />
+
+                <div className='flex gap-2'>
+                  <Button variant='secondary' asChild>
+                    <Link href={`/collection/edit/${lesson.id}`}>
+                      Edit Lesson
+                    </Link>
+                  </Button>
+                  <Button>Start Lesson</Button>
+                </div>
               </section>
             </AccordionContent>
           </AccordionItem>

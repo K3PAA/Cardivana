@@ -22,7 +22,9 @@ export const flashcard = pgTable('flashcard', {
     .uuid('user_id')
     .notNull()
     .references(() => user.id),
-  lessonId: t.uuid('lesson_id').references(() => lesson.id),
+  lessonId: t.uuid('lesson_id').references(() => lesson.id, {
+    onDelete: 'cascade',
+  }),
 
   front: t.jsonb().$type<FlashcardFace>(),
   back: t.jsonb().$type<FlashcardFace>(),

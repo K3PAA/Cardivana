@@ -2,11 +2,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useAction } from 'next-safe-action/hooks'
 import { useFieldArray, useForm } from 'react-hook-form'
 
-import { CreateLessonFormInput } from '@/lib/types'
-import { createLessonInputSchema } from '../validation/lesson-valid'
+import { CreateLessonForm } from '@/lib/types'
+import { createLessonSchema } from '../validation/lesson-valid'
 import { createLessonAction } from '@/actions/lesson-action'
 
-const defaultValues: CreateLessonFormInput = {
+const defaultValues: CreateLessonForm = {
   title: '',
   description: '',
   visibility: 'public',
@@ -36,8 +36,8 @@ const defaultValues: CreateLessonFormInput = {
 export const useCreateLessonForm = () => {
   const { execute, isPending } = useAction(createLessonAction)
 
-  const form = useForm<CreateLessonFormInput>({
-    resolver: zodResolver(createLessonInputSchema),
+  const form = useForm<CreateLessonForm>({
+    resolver: zodResolver(createLessonSchema),
     defaultValues,
   })
 
@@ -51,8 +51,8 @@ export const useCreateLessonForm = () => {
     name: 'flashcards',
   })
 
-  async function onSubmit(values: CreateLessonFormInput) {
-    execute({ ...values, price: parseFloat(values.price) || 0 })
+  async function onSubmit(values: CreateLessonForm) {
+    execute({ ...values })
   }
 
   return {

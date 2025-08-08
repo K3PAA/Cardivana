@@ -1,14 +1,22 @@
 'use server'
 import { verifyUser } from '@/dal/verify-user'
 import { db } from '@/db'
+
 import { flashcard } from '@/db/schema/flashcard'
 import { lesson } from '@/db/schema/lesson'
 import { actionClient } from '@/lib/safe-action'
-import { createLessonOutputSchema } from '@/lib/validation/lesson-valid'
+import {
+  createLessonSchema,
+  deleteLessonSchema,
+  editLessonSchema,
+} from '@/lib/validation/lesson-valid'
+import { eq } from 'drizzle-orm'
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 import slugify from 'slugify'
 
 export const createLessonAction = actionClient
-  .inputSchema(createLessonOutputSchema)
+  .inputSchema(createLessonSchema)
   .action(async ({ parsedInput }) => {
     const session = await verifyUser()
 
@@ -21,6 +29,7 @@ export const createLessonAction = actionClient
       .insert(lesson)
       .values({
         ...parsedInput,
+        price: parsedInput.price,
         userId: session.user.id,
         slug,
         tags: parsedInput.tags.map((value) => value.tag),
@@ -38,4 +47,69 @@ export const createLessonAction = actionClient
         })
       }),
     )
+    revalidatePath('/collection')
+    redirect('/collection')
+  })
+
+export const editLessonAction = actionClient
+  .inputSchema(editLessonSchema)
+  .action(async ({ parsedInput }) => {
+    await verifyUser()
+
+    const lessonWithSameName = await db.query.lesson.findMany({
+      where: (lesson, { eq }) => eq(lesson.title, parsedInput.title),
+    })
+    const slug = slugify(parsedInput.title + ' ' + lessonWithSameName.length)
+
+    await db
+      .update(lesson)
+      .set({
+        ...parsedInput,
+        price: parsedInput.price,
+        slug,
+        tags: parsedInput.tags.map((value) => value.tag),
+      })
+      .where(eq(lesson.id, parsedInput.lessonId))
+
+    await Promise.all(
+      parsedInput.flashcards.map(async (card) => {
+        console.log(card)
+        return db.update(flashcard).set({
+          difficulty: card.difficulty,
+          front: card.front,
+          back: card.back,
+        })
+      }),
+    )
+    revalidatePath('/collection')
+    redirect('/collection')
+  })
+
+export const removeLessonAction = actionClient
+  .inputSchema(deleteLessonSchema)
+  .action(async ({ parsedInput: { lessonId } }) => {
+    const { user } = await verifyUser()
+
+    if (!user) return { success: false }
+
+    const lessonData = await db.query.lesson.findFirst({
+      where: (lesson, { eq }) => eq(lesson.id, lessonId),
+      columns: {
+        id: true,
+        userId: true,
+      },
+    })
+
+    if (!lessonData) {
+      return { success: false }
+    }
+
+    if (lessonData.userId !== user.id && user.role !== 'admin') {
+      return { success: false }
+    }
+
+    await db.delete(lesson).where(eq(lesson.id, lessonId))
+
+    revalidatePath('/collection')
+    return { success: true }
   })

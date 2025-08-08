@@ -5,7 +5,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import FormFieldWrapper from '../FormFieldWrapper'
+import FormFieldWrapper from '../../../_components/form/FormFieldWrapper'
 import { ControllerRenderProps } from 'react-hook-form'
 import { FormControl } from '@/components/ui/form'
 import { CreateLessonFormInput } from '@/lib/types'

@@ -16,7 +16,7 @@ export const lesson = pgTable('lesson', {
   slug: t.varchar('slug', { length: 256 }).notNull().unique(),
   tags: t.varchar('tags', { length: 256 }).array().notNull().default([]),
   visibility: visibilityEnum('visibility').notNull().default('public'),
-  price: t.integer('price').notNull().default(0),
+  price: t.numeric('price', { precision: 10, scale: 2 }),
   ...timestamps,
 })
 

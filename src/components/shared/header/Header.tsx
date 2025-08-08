@@ -69,17 +69,7 @@ export default function Header() {
           </Link>
         </div>
 
-        <nav
-          className={cn(
-            'bg-background flex w-full flex-row-reverse items-center',
-          )}
-        >
-          <div className='flex items-center gap-2'>
-            <AuthButtons className='hidden sm:flex' />
-            <ThemeToggle />
-            <MobileToggle isOpen={isOpen} handleClick={handleToggleClick} />
-          </div>
-
+        <nav className={cn('bg-background flex w-full flex-row items-center')}>
           <ul
             ref={ulRef}
             id='primary-navigation'
@@ -112,6 +102,12 @@ export default function Header() {
             })}
             <AuthButtons className='grid grid-cols-2 sm:hidden' />
           </ul>
+
+          <div className='flex items-center gap-2'>
+            <AuthButtons className='hidden sm:flex' />
+            <ThemeToggle />
+            <MobileToggle isOpen={isOpen} handleClick={handleToggleClick} />
+          </div>
         </nav>
       </Wrapper>
     </header>
