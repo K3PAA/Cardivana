@@ -12,10 +12,10 @@ import FormFieldWrapper from './FormFieldWrapper'
 import PriceInputWrapper from './lesson/PriceInputWrapper'
 import TagFieldArray from './lesson/TagFieldArray'
 import VisibilitySelect from './lesson/VisibilitySelect'
-import { CreateLessonForm } from '@/lib/types'
+import { EditLessonForm } from '@/lib/types'
 
 type EditFormProps = {
-  defaultValues: CreateLessonForm
+  defaultValues: EditLessonForm
   lessonId: string
 }
 

@@ -8,7 +8,7 @@ import { actionClient } from '@/lib/safe-action'
 import {
   createLessonSchema,
   deleteLessonSchema,
-  editLessonSchema,
+  editLessonWithLessonIdSchema,
 } from '@/lib/validation/lesson-valid'
 import { eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
@@ -52,9 +52,9 @@ export const createLessonAction = actionClient
   })
 
 export const editLessonAction = actionClient
-  .inputSchema(editLessonSchema)
+  .inputSchema(editLessonWithLessonIdSchema)
   .action(async ({ parsedInput }) => {
-    await verifyUser()
+    const { user } = await verifyUser()
 
     const lessonWithSameName = await db.query.lesson.findMany({
       where: (lesson, { eq }) => eq(lesson.title, parsedInput.title),
@@ -73,12 +73,29 @@ export const editLessonAction = actionClient
 
     await Promise.all(
       parsedInput.flashcards.map(async (card) => {
-        console.log(card)
-        return db.update(flashcard).set({
-          difficulty: card.difficulty,
-          front: card.front,
-          back: card.back,
-        })
+        const [exists] = await db
+          .select()
+          .from(flashcard)
+          .where(eq(flashcard.id, card.id))
+          .limit(1)
+        if (exists) {
+          return db
+            .update(flashcard)
+            .set({
+              difficulty: card.difficulty,
+              front: card.front,
+              back: card.back,
+            })
+            .where(eq(flashcard.id, card.id))
+        } else {
+          return db.insert(flashcard).values({
+            userId: user.id,
+            lessonId: parsedInput.lessonId,
+            difficulty: card.difficulty,
+            front: card.front,
+            back: card.back,
+          })
+        }
       }),
     )
     revalidatePath('/collection')

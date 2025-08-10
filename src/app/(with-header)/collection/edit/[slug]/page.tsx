@@ -24,12 +24,14 @@ export default async function EditLesson({
             front: card.front!,
             back: card.back!,
             difficulty: card.difficulty,
+            id: card.id,
           })),
       }
     : null
 
+  console.log(lessonData.data)
   return (
-    <main className='pt-4'>
+    <main className='mb-8 pt-4'>
       <h1 className='mb-2 text-3xl font-bold'>
         Edit "{lessonData.data?.title}"
       </h1>

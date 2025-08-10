@@ -1,7 +1,7 @@
 import z from 'zod'
-import { falshcardSchema } from './flashcard-valid'
+import { flashcardSchema, falshcardWithIdSchema } from './flashcard-valid'
 
-export const createLessonSchema = z.object({
+export const lessonSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   description: z.string().min(1, 'Description is required'),
   tags: z.array(
@@ -16,10 +16,17 @@ export const createLessonSchema = z.object({
     .refine((val) => val >= 0, 'Price must be non-negative')
     .transform((val) => val.toFixed(2)),
   visibility: z.enum(['public', 'private']),
-  flashcards: z.array(falshcardSchema),
 })
 
-export const editLessonSchema = createLessonSchema.extend({
+export const createLessonSchema = lessonSchema.extend({
+  flashcards: z.array(flashcardSchema),
+})
+
+export const editLessonSchema = lessonSchema.extend({
+  flashcards: z.array(falshcardWithIdSchema),
+})
+
+export const editLessonWithLessonIdSchema = editLessonSchema.extend({
   lessonId: z.string(),
 })
 

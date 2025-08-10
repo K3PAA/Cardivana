@@ -1,17 +1,26 @@
 import { Button } from '@/components/ui/button'
-import { CreateLessonFormInput } from '@/lib/types'
+import { CreateLessonForm, EditLessonForm } from '@/lib/types'
 import { PlusIcon, Trash } from 'lucide-react'
 import { Control, UseFieldArrayReturn } from 'react-hook-form'
 import FlashcardTab from './FlashcardTab'
 
-type FlashcardFieldArrayProps = {
-  control: Control<CreateLessonFormInput, any, CreateLessonFormInput>
-  flashcardFieldArray: UseFieldArrayReturn<
-    CreateLessonFormInput,
-    'flashcards',
-    'id'
-  >
-}
+type FlashcardFieldArrayProps =
+  | {
+      control: Control<CreateLessonForm, any, CreateLessonForm>
+      flashcardFieldArray: UseFieldArrayReturn<
+        CreateLessonForm,
+        'flashcards',
+        'id'
+      >
+    }
+  | {
+      control: Control<EditLessonForm, any, EditLessonForm>
+      flashcardFieldArray: UseFieldArrayReturn<
+        EditLessonForm,
+        'flashcards',
+        'id'
+      >
+    }
 
 const defaultFaceValues = {
   text: '',
@@ -36,6 +45,7 @@ export default function FlashcardFieldArray({
           variant='secondary'
           onClick={() =>
             append({
+              id: crypto.randomUUID(),
               difficulty: 'hard',
               back: defaultFaceValues,
               front: defaultFaceValues,
@@ -69,6 +79,7 @@ export default function FlashcardFieldArray({
         variant='secondary'
         onClick={() =>
           append({
+            id: crypto.randomUUID(),
             difficulty: 'hard',
             back: defaultFaceValues,
             front: defaultFaceValues,

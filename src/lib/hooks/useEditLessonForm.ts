@@ -2,19 +2,19 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useAction } from 'next-safe-action/hooks'
 import { useFieldArray, useForm } from 'react-hook-form'
 
-import { CreateLessonForm } from '@/lib/types'
+import { CreateLessonForm, EditLessonForm } from '@/lib/types'
 import { editLessonSchema } from '../validation/lesson-valid'
 import { editLessonAction } from '@/actions/lesson-action'
 
 export const useEditLessonForm = (
-  defaultValues: CreateLessonForm,
+  defaultValues: EditLessonForm,
   lessonId: string,
 ) => {
   const { execute, isPending } = useAction(editLessonAction)
 
-  const form = useForm<CreateLessonForm & { lessonId: string }>({
+  const form = useForm<EditLessonForm>({
     resolver: zodResolver(editLessonSchema),
-    defaultValues: { ...defaultValues, lessonId },
+    defaultValues: { ...defaultValues },
   })
 
   const tagFieldArray = useFieldArray({
@@ -27,7 +27,7 @@ export const useEditLessonForm = (
     name: 'flashcards',
   })
 
-  async function onSubmit(values: CreateLessonForm) {
+  async function onSubmit(values: EditLessonForm) {
     execute({ ...values, lessonId })
   }
 

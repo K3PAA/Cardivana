@@ -16,8 +16,12 @@ export const flashcardFaceSchema = z.object({
   ),
 })
 
-export const falshcardSchema = z.object({
+export const flashcardSchema = z.object({
   front: flashcardFaceSchema,
   back: flashcardFaceSchema,
   difficulty: z.enum(['easy', 'normal', 'medium', 'hard', 'extreme']),
+})
+
+export const falshcardWithIdSchema = flashcardSchema.extend({
+  id: z.string(),
 })
