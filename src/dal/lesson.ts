@@ -1,7 +1,6 @@
+import { db } from '@/db'
 import 'server-only'
 import { verifyUser } from './verify-user'
-import { db } from '@/db'
-import { sleep } from '@/lib/utils'
 
 export const getUserLessons = async () => {
   const { user: activeUser } = await verifyUser()

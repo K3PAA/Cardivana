@@ -7,10 +7,10 @@ import SignOutButton from '../SignOutButton'
 import { cn } from '@/lib/utils'
 
 type AuthButtonsProps = {
-  className: string
+  className?: string
 }
 
-export default function HeaderAuth({ className }: AuthButtonsProps) {
+export default function AuthButtons({ className = '' }: AuthButtonsProps) {
   const { data, isPending } = authClient.useSession()
 
   if (isPending) return

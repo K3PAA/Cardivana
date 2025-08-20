@@ -1,5 +1,6 @@
 import { getUserLessonInfo } from '@/dal/lesson'
 import EditForm from '../../_components/form/EditForm'
+import Wrapper from '@/components/shared/Wrapper'
 
 export default async function EditLesson({
   params,
@@ -31,11 +32,13 @@ export default async function EditLesson({
 
   console.log(lessonData.data)
   return (
-    <main className='mb-8 pt-4'>
-      <h1 className='mb-2 text-3xl font-bold'>
-        Edit "{lessonData.data?.title}"
-      </h1>
-      {formData && <EditForm defaultValues={formData} lessonId={lessonId} />}
-    </main>
+    <Wrapper className='mt-navigation-height'>
+      <main className='mb-8 pt-4'>
+        <h1 className='mb-2 text-3xl font-bold'>
+          Edit "{lessonData.data?.title}"
+        </h1>
+        {formData && <EditForm defaultValues={formData} lessonId={lessonId} />}
+      </main>
+    </Wrapper>
   )
 }

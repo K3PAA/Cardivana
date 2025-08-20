@@ -10,9 +10,9 @@
   --card-foreground: oklch(0.3015 0.0572 282.4176);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.3015 0.0572 282.4176);
-  --primary: oklch(0.5417 0.179 288.0332);
+  --primary: rgb(110, 86, 207);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.9174 0.0435 292.6901);
+  --secondary: rgb(228, 223, 255);
   --secondary-foreground: oklch(0.4143 0.1039 288.1742);
   --muted: oklch(0.958 0.0133 286.1454);
   --muted-foreground: oklch(0.5426 0.0465 284.7435);
@@ -185,6 +185,10 @@
   --spacing-navigation-height: var(--navigation-height);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   letter-spacing: var(--tracking-normal);
   background-color: var(--color-background);
@@ -239,4 +243,21 @@ body {
     transform: translateY(-200px);
     opacity: 0;
   }
+}
+
+.home {
+  mask: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
 }

@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button'
 import { getUserLessons } from '@/dal/lesson'
 import { PlusIcon, StarIcon } from 'lucide-react'
 import { Accordion as AccordionPrimitive } from 'radix-ui'
-import PreviewPagination from './PreviewPagination'
 import { cn } from '@/lib/utils'
 import RemoveLesson from './RemoveLesson'
 import Link from 'next/link'
@@ -26,7 +25,7 @@ export default async function CollectionLessons() {
           <AccordionItem
             value={lesson.id}
             key={lesson.id}
-            className='hover:bg-ring/5 border-boborder-border'
+            className='hover:bg-ring/5 border-border'
           >
             <AccordionPrimitive.Header className='flex'>
               <AccordionPrimitive.Trigger className='focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 cursor-pointer items-center gap-4 rounded-md p-4 text-left text-sm text-[15px] leading-6 font-semibold transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&>svg]:-order-1 [&>svg>path:last-child]:origin-center [&>svg>path:last-child]:transition-all [&>svg>path:last-child]:duration-200 [&[data-state=open]>svg]:rotate-180 [&[data-state=open]>svg>path:last-child]:rotate-90 [&[data-state=open]>svg>path:last-child]:opacity-0'>
@@ -51,7 +50,7 @@ export default async function CollectionLessons() {
                 />
               </AccordionPrimitive.Trigger>
             </AccordionPrimitive.Header>
-            <AccordionContent className='mt-2 grid gap-2 ps-7 pe-4 pb-2'>
+            <AccordionContent className='mt-2 grid gap-2 ps-7 pe-4 pb-4'>
               <section className='grid grid-cols-[2fr_1fr] gap-4'>
                 <div>
                   <p className='text-lg'>Descirption</p>
@@ -96,8 +95,6 @@ export default async function CollectionLessons() {
                     )
                   })}
                 </ul>
-
-                <PreviewPagination currentPage={0} totalPages={10} />
               </section>
 
               <section className='mt-4 flex justify-between gap-3'>

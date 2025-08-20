@@ -1,4 +1,5 @@
 import SignOutButton from '@/components/shared/SignOutButton'
+import Wrapper from '@/components/shared/Wrapper'
 
 import { auth } from '@/lib/auth'
 import { headers } from 'next/headers'
@@ -11,10 +12,10 @@ export default async function page() {
   if (!session) return <p>Unauthorized</p>
 
   return (
-    <div>
+    <Wrapper className='mt-navigation-height'>
       <pre className='text-small overflow-clip'>
         {JSON.stringify(session, null, 2)}
       </pre>
-    </div>
+    </Wrapper>
   )
 }

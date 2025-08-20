@@ -8,6 +8,7 @@ import { Skeleton } from '../../ui/skeleton'
 import { ThemeToggle } from '../../ui/theme-toggle'
 import AuthButtons from './AuthButtons'
 import Wrapper from '../Wrapper'
+import Logo from '../Logo'
 
 const navLinks = [
   {
@@ -60,16 +61,13 @@ export default function Header() {
   }, [state])
 
   return (
-    <header className='bg-background fixed top-0 left-0 w-full border-b'>
-      <Wrapper className='h-navigation-height flex items-center gap-4'>
-        <div className='flex items-center gap-2'>
-          <Skeleton className='h-9 w-9 rounded-full' />
-          <Link href='/' className='font-black uppercase'>
-            logo
-          </Link>
-        </div>
+    <header className='bg-background border-border fixed top-0 left-0 z-100 w-full border-b'>
+      <Wrapper className='h-navigation-height flex items-center justify-between gap-4'>
+        <Logo />
 
-        <nav className={cn('bg-background flex w-full flex-row items-center')}>
+        <nav
+          className={cn('bg-background flex flex-row items-center md:w-full')}
+        >
           <ul
             ref={ulRef}
             id='primary-navigation'
