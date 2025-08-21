@@ -6,7 +6,11 @@ export const lessonSchema = z.object({
   description: z.string().min(1, 'Description is required'),
   tags: z.array(
     z.object({
-      tag: z.string().min(1, 'Min 1 character').max(16, 'Max 16 characters.'),
+      tag: z
+        .string()
+        .min(1, 'Min 1 character')
+        .max(16, 'Max 16 characters.')
+        .refine((s) => !s.includes(' '), 'No Spaces!'),
     }),
   ),
   price: z

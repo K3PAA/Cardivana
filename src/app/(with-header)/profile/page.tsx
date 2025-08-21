@@ -7,8 +7,6 @@ import Wrapper from '@/components/shared/Wrapper'
 import { sleep } from '@/lib/utils'
 
 export default async function page() {
-  await sleep(3000)
-
   const session = await auth.api.getSession({
     headers: await headers(),
   })

@@ -1,27 +1,52 @@
+'use client'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
 } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
-import { getUserLessons } from '@/dal/lesson'
-import { PlusIcon, StarIcon } from 'lucide-react'
-import { Accordion as AccordionPrimitive } from 'radix-ui'
-import { cn } from '@/lib/utils'
-import RemoveLesson from './RemoveLesson'
-import Link from 'next/link'
 
-export default async function CollectionLessons() {
-  const lessons = await getUserLessons()
+import { cn } from '@/lib/utils'
+import { PlusIcon } from 'lucide-react'
+import Link from 'next/link'
+import { Accordion as AccordionPrimitive } from 'radix-ui'
+import RemoveLesson from './RemoveLesson'
+import { LessonWithFlashcards } from '@/lib/types'
+import { useFilterCollectionStore } from '@/stores/filter-collection-store'
+
+type CollectionLessonsProps = {
+  lessons: LessonWithFlashcards[]
+}
+
+export default function CollectionLessons({ lessons }: CollectionLessonsProps) {
+  const search = useFilterCollectionStore((state) => state.search)
+  const tags = useFilterCollectionStore((state) => state.tags)
+
+  const filteredLessons = lessons.slice().filter((lesson) => {
+    const searchCorrect = lesson.title
+      .toLowerCase()
+      .startsWith(search.toLowerCase())
+    const tagsCorrect =
+      tags.length === 0 || tags.every((tag) => lesson.tags.includes(tag))
+
+    return searchCorrect && tagsCorrect
+  })
 
   return (
     <>
+      {filteredLessons.length === 0 && lessons.length > 0 && (
+        <section className='p-8'>
+          <h2 className='text-center text-3xl'>
+            Modify your filters, no lesson matches your requirements
+          </h2>
+        </section>
+      )}
       <Accordion
         type='single'
         collapsible
         className='border-border w-full border-b'
       >
-        {lessons.map((lesson) => (
+        {filteredLessons.map((lesson) => (
           <AccordionItem
             value={lesson.id}
             key={lesson.id}

@@ -42,6 +42,7 @@ export default function Header() {
   }, [state])
 
   useEffect(() => {
+    if (!isOpen) return
     setIsOpen(false)
     setState('closing')
   }, [pathname])
