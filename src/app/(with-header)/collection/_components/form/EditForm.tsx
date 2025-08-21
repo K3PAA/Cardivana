@@ -7,12 +7,13 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useEditLessonForm } from '@/lib/hooks/useEditLessonForm'
 
+import { EditLessonForm } from '@/lib/types'
+import { useRouter } from 'next/navigation'
 import FlashcardFieldArray from './flashcard/FlashcardFieldArray'
 import FormFieldWrapper from './FormFieldWrapper'
 import PriceInputWrapper from './lesson/PriceInputWrapper'
 import TagFieldArray from './lesson/TagFieldArray'
 import VisibilitySelect from './lesson/VisibilitySelect'
-import { EditLessonForm } from '@/lib/types'
 
 type EditFormProps = {
   defaultValues: EditLessonForm
@@ -27,13 +28,13 @@ export default function EditForm({ defaultValues, lessonId }: EditFormProps) {
     <Form {...form}>
       <form
         onSubmit={handleSubmit}
-        className='grid grid-cols-7 gap-3 space-y-1 lg:gap-6'
+        className='grid gap-3 space-y-1 md:grid-cols-7 lg:gap-6'
       >
         <FormField
           control={form.control}
           name='title'
           render={({ field }) => (
-            <FormFieldWrapper label='Lesson Title' className='col-span-4'>
+            <FormFieldWrapper label='Lesson Title' className='md:col-span-4'>
               <FormControl>
                 <Input placeholder='Enter lesson title' {...field} />
               </FormControl>
@@ -45,7 +46,7 @@ export default function EditForm({ defaultValues, lessonId }: EditFormProps) {
           control={form.control}
           name='price'
           render={({ field }) => (
-            <FormFieldWrapper label='Lesson Price' className='col-span-2'>
+            <FormFieldWrapper label='Lesson Price' className='md:col-span-2'>
               <FormControl>
                 <PriceInputWrapper>
                   <Input
@@ -73,7 +74,7 @@ export default function EditForm({ defaultValues, lessonId }: EditFormProps) {
           render={({ field }) => (
             <FormFieldWrapper
               label='Lesson Description'
-              className='col-span-4 self-start'
+              className='self-start md:col-span-4'
             >
               <FormControl>
                 <Textarea

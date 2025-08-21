@@ -12,84 +12,87 @@ import PriceInputWrapper from './lesson/PriceInputWrapper'
 import VisibilitySelect from './lesson/VisibilitySelect'
 import FlashcardFieldArray from './flashcard/FlashcardFieldArray'
 import TagFieldArray from './lesson/TagFieldArray'
+import { useRouter } from 'next/navigation'
 
 export default function CreateForm() {
   const { form, handleSubmit, isPending, tagFieldArray, flashcardFieldArray } =
     useCreateLessonForm()
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={handleSubmit}
-        className='grid grid-cols-7 gap-3 space-y-1 lg:gap-6'
-      >
-        <FormField
-          control={form.control}
-          name='title'
-          render={({ field }) => (
-            <FormFieldWrapper label='Lesson Title' className='col-span-4'>
-              <FormControl>
-                <Input placeholder='Enter lesson title' {...field} />
-              </FormControl>
-            </FormFieldWrapper>
-          )}
-        />
+    <>
+      <Form {...form}>
+        <form
+          onSubmit={handleSubmit}
+          className='grid gap-3 space-y-1 md:grid-cols-7 lg:gap-6'
+        >
+          <FormField
+            control={form.control}
+            name='title'
+            render={({ field }) => (
+              <FormFieldWrapper label='Lesson Title' className='md:col-span-4'>
+                <FormControl>
+                  <Input placeholder='Enter lesson title' {...field} />
+                </FormControl>
+              </FormFieldWrapper>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name='price'
-          render={({ field }) => (
-            <FormFieldWrapper label='Lesson Price' className='col-span-2'>
-              <FormControl>
-                <PriceInputWrapper>
-                  <Input
+          <FormField
+            control={form.control}
+            name='price'
+            render={({ field }) => (
+              <FormFieldWrapper label='Lesson Price' className='md:col-span-2'>
+                <FormControl>
+                  <PriceInputWrapper>
+                    <Input
+                      {...field}
+                      className='peer ps-6 pe-12'
+                      type='number'
+                      step={0.01}
+                      min={0}
+                    />
+                  </PriceInputWrapper>
+                </FormControl>
+              </FormFieldWrapper>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name='visibility'
+            render={({ field }) => <VisibilitySelect field={field} />}
+          />
+
+          <FormField
+            control={form.control}
+            name='description'
+            render={({ field }) => (
+              <FormFieldWrapper
+                label='Lesson Description'
+                className='self-start md:col-span-4'
+              >
+                <FormControl>
+                  <Textarea
+                    placeholder='What is your lesson about...'
                     {...field}
-                    className='peer ps-6 pe-12'
-                    type='number'
-                    step={0.01}
-                    min={0}
                   />
-                </PriceInputWrapper>
-              </FormControl>
-            </FormFieldWrapper>
-          )}
-        />
+                </FormControl>
+              </FormFieldWrapper>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name='visibility'
-          render={({ field }) => <VisibilitySelect field={field} />}
-        />
+          <TagFieldArray tagFieldArray={tagFieldArray} control={form.control} />
 
-        <FormField
-          control={form.control}
-          name='description'
-          render={({ field }) => (
-            <FormFieldWrapper
-              label='Lesson Description'
-              className='col-span-4 self-start'
-            >
-              <FormControl>
-                <Textarea
-                  placeholder='What is your lesson about...'
-                  {...field}
-                />
-              </FormControl>
-            </FormFieldWrapper>
-          )}
-        />
+          <FlashcardFieldArray
+            flashcardFieldArray={flashcardFieldArray}
+            control={form.control}
+          />
 
-        <TagFieldArray tagFieldArray={tagFieldArray} control={form.control} />
-
-        <FlashcardFieldArray
-          flashcardFieldArray={flashcardFieldArray}
-          control={form.control}
-        />
-
-        <Button type='submit' className='w-full' disabled={isPending}>
-          <WithPending isPending={isPending}>Create lessons</WithPending>
-        </Button>
-      </form>
-    </Form>
+          <Button type='submit' className='w-full' disabled={isPending}>
+            <WithPending isPending={isPending}>Create lessons</WithPending>
+          </Button>
+        </form>
+      </Form>
+    </>
   )
 }

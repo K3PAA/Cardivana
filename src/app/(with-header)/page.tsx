@@ -9,7 +9,7 @@ export default function page() {
   return (
     <>
       <main
-        className='home bg-background/20 relative grid min-h-screen place-content-center'
+        className='home bg-background/20 grid min-h-[calc(100vh_-_var(--navigation-height))] place-content-center'
         style={{
           backgroundImage: `
      linear-gradient(to right, rgba(71,85,105,0.15) 1px, transparent 1px),
@@ -19,7 +19,7 @@ export default function page() {
           backgroundSize: '40px 40px, 40px 40px, 100% 100%',
         }}
       >
-        <Wrapper className='absolute top-2/5 left-1/2 flex h-full -translate-x-1/2 flex-col justify-between'>
+        <Wrapper className='-mt-32 flex h-full flex-col justify-between'>
           <section className='grid gap-4 text-center'>
             <div>
               <h1 className='sr-only'>
@@ -29,17 +29,17 @@ export default function page() {
                 <TextAnimate
                   text='Learn new language '
                   type='fadeInUp'
-                  className='text-3xl font-bold sm:text-5xl'
+                  className='text-2xl font-bold sm:text-5xl'
                 />
                 <TextAnimate
                   text='in the best possible way.'
                   type='fadeInUp'
-                  className='text-3xl font-bold sm:text-5xl'
+                  className='text-2xl font-bold sm:text-5xl'
                 />
               </div>
             </div>
 
-            <p className='text-muted-foreground capitalized mx-auto max-w-[50ch] text-xl'>
+            <p className='text-muted-foreground capitalized mx-auto max-w-[50ch] text-lg sm:text-xl'>
               Personalised learning pattern, printing flashcard functionality.
               Create your own lessons or learn from already created ones
             </p>

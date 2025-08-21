@@ -17,7 +17,7 @@ export const auth = betterAuth({
   user: {
     additionalFields: {
       role: {
-        type: ['user', 'pro-user', 'creator', 'admin'],
+        type: ['user', 'pro', 'admin'],
         input: false, // don't have to specify it when creating user
       },
     },

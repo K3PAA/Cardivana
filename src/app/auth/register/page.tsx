@@ -14,15 +14,8 @@ import Link from 'next/link'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
-import { sleep } from '@/lib/utils'
 
 export default async function page() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  })
-
-  if (session) redirect('/')
-
   return (
     <Card className='w-full max-w-md'>
       <CardHeader>

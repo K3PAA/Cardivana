@@ -7,15 +7,20 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { CreateLessonFormInput } from '@/lib/types'
+import { CreateLessonForm, EditLessonForm } from '@/lib/types'
 import { PlusIcon, Trash } from 'lucide-react'
 import React from 'react'
 import { Control, UseFieldArrayReturn } from 'react-hook-form'
 
-type TagFieldArrayProps = {
-  control: Control<CreateLessonFormInput, any, CreateLessonFormInput>
-  tagFieldArray: UseFieldArrayReturn<CreateLessonFormInput, 'tags', 'id'>
-}
+type TagFieldArrayProps =
+  | {
+      control: Control<EditLessonForm, any, EditLessonForm>
+      tagFieldArray: UseFieldArrayReturn<EditLessonForm, 'tags', 'id'>
+    }
+  | {
+      control: Control<CreateLessonForm, any, CreateLessonForm>
+      tagFieldArray: UseFieldArrayReturn<CreateLessonForm, 'tags', 'id'>
+    }
 
 export default function TagFieldArray({
   control,
@@ -23,7 +28,7 @@ export default function TagFieldArray({
 }: TagFieldArrayProps) {
   const { fields, remove, append } = tagFieldArray
   return (
-    <section className='col-span-3 space-y-4'>
+    <section className='space-y-4 md:col-span-3'>
       <div className='grid grid-cols-[1fr_auto]'>
         <FormLabel>Lesson Tags</FormLabel>
         <Button

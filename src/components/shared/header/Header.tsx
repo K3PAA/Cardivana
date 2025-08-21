@@ -4,30 +4,11 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { Skeleton } from '../../ui/skeleton'
 import { ThemeToggle } from '../../ui/theme-toggle'
-import AuthButtons from './AuthButtons'
-import Wrapper from '../Wrapper'
 import Logo from '../Logo'
-
-const navLinks = [
-  {
-    href: '/',
-    label: 'Home',
-  },
-  {
-    href: '/explore',
-    label: 'Explore Lessons',
-  },
-  {
-    href: '/collection',
-    label: 'My Collection',
-  },
-  {
-    href: '/profile',
-    label: 'Profile',
-  },
-]
+import Wrapper from '../Wrapper'
+import AuthButtons from './AuthButtons'
+import { navLinks } from '@/lib/data'
 
 export default function Header() {
   const pathname = usePathname()
@@ -60,20 +41,23 @@ export default function Header() {
     )
   }, [state])
 
+  useEffect(() => {
+    setIsOpen(false)
+    setState('closing')
+  }, [pathname])
+
   return (
-    <header className='bg-background border-border fixed top-0 left-0 z-100 w-full border-b'>
-      <Wrapper className='h-navigation-height flex items-center justify-between gap-4'>
+    <header className='bg-card border-border w-full border-b'>
+      <Wrapper className='h-navigation-height mt-0 flex items-center justify-between gap-4'>
         <Logo />
 
-        <nav
-          className={cn('bg-background flex flex-row items-center md:w-full')}
-        >
+        <nav className={cn('bg-card flex flex-row items-center md:w-full')}>
           <ul
             ref={ulRef}
             id='primary-navigation'
             data-state={state}
             className={cn(
-              'top-navigation-height bg-background fixed left-0 z-100 flex w-full flex-col gap-2 overflow-auto border-b p-4 md:static md:h-auto md:translate-0 md:flex-row md:border-b-0 md:py-0 md:opacity-100',
+              'top-navigation-height bg-card fixed left-0 z-100 flex w-full flex-col gap-2 overflow-auto border-b p-4 md:static md:h-auto md:translate-0 md:flex-row md:border-b-0 md:py-0 md:opacity-100',
             )}
           >
             {navLinks.map((link) => {

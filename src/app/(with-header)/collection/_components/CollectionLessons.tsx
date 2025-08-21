@@ -51,13 +51,18 @@ export default async function CollectionLessons() {
               </AccordionPrimitive.Trigger>
             </AccordionPrimitive.Header>
             <AccordionContent className='mt-2 grid gap-2 ps-7 pe-4 pb-4'>
-              <section className='grid grid-cols-[2fr_1fr] gap-4'>
+              <section className='grid gap-4 sm:grid-cols-[2fr_1fr]'>
                 <div>
                   <p className='text-lg'>Descirption</p>
                   <p className='text-muted-foreground'>
                     {' '}
                     {lesson.description}{' '}
                   </p>
+                </div>
+
+                <div>
+                  <p className='text-lg'>Visibility</p>
+                  <p className='text-muted-foreground'>{lesson.visibility} </p>
                 </div>
 
                 <div>
@@ -97,14 +102,12 @@ export default async function CollectionLessons() {
                 </ul>
               </section>
 
-              <section className='mt-4 flex justify-between gap-3'>
+              <section className='mt-4 flex flex-wrap justify-between gap-3'>
                 <RemoveLesson lessonId={lesson.id} />
 
                 <div className='flex gap-2'>
                   <Button variant='secondary' asChild>
-                    <Link href={`/collection/edit/${lesson.id}`}>
-                      Edit Lesson
-                    </Link>
+                    <Link href={`/collection/edit/${lesson.id}`}>Edit</Link>
                   </Button>
                   <Button>Start Lesson</Button>
                 </div>

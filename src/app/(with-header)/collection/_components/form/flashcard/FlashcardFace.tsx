@@ -2,12 +2,12 @@ import { Card, CardContent } from '@/components/ui/card'
 import { FormControl, FormField } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { CreateLessonFormInput } from '@/lib/types'
-import { Control, useFieldArray } from 'react-hook-form'
+import { CreateLessonForm } from '@/lib/types'
+import { Control } from 'react-hook-form'
 import FormFieldWrapper from '../../../_components/form/FormFieldWrapper'
 
 type FaceProps = {
-  control: Control<CreateLessonFormInput, any, CreateLessonFormInput>
+  control: Control<CreateLessonForm, any, CreateLessonForm>
   face: 'front' | 'back'
   index: number
 }
@@ -28,7 +28,7 @@ export default function FlashcardFace({ control, face, index }: FaceProps) {
           )}
         />
 
-        <div className='grid grid-cols-2 gap-4'>
+        <div className='grid gap-4 sm:grid-cols-2'>
           <FormField
             control={control}
             name={`flashcards.${index}.${face}.definition`}

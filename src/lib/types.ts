@@ -1,6 +1,6 @@
 import z from 'zod'
 import {
-  falshcardSchema,
+  flashcardSchema,
   flashcardFaceSchema,
 } from './validation/flashcard-valid'
 import { registerFormSchema, loginFormSchema } from './validation/auth-valid'
@@ -15,4 +15,4 @@ export type EditLessonForm = Omit<CreateLessonForm, 'flashcards'> & {
   flashcards: (CreateLessonForm['flashcards'][0] & { id: string })[]
 }
 export type FlashcardFace = z.infer<typeof flashcardFaceSchema>
-export type Flashcard = z.infer<typeof falshcardSchema>
+export type Flashcard = z.infer<typeof flashcardSchema>

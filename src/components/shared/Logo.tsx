@@ -1,8 +1,6 @@
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
-import { ShimmeringText } from '@/components/ui/shimmering-text'
-
 type LogoProps = {
   className?: string
 }

@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Cardivana - learn new language',
-  description: 'Cardivana, learn new language using flashcard for free.',
+  title: 'Cardivana',
+  description: 'Cardivana, learn new language using flashcards for free.',
 }
 
 export default function RootLayout({

@@ -37,7 +37,7 @@ export default function FlashcardFieldArray({
   const { fields, remove, append } = flashcardFieldArray
 
   return (
-    <section className='col-span-full'>
+    <section className='md:col-span-full'>
       <div className='grid grid-cols-[1fr_auto]'>
         <h2 className='text-3xl'>Create Flashcards</h2>
         <Button
