@@ -25,7 +25,11 @@ export default function RemoveLesson({ lessonId }: { lessonId: string }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant='destructive' disabled={isPending}>
+        <Button
+          variant='destructive'
+          disabled={isPending}
+          className='capitalize'
+        >
           <WithPending isPending={isPending} pendingText='removing...'>
             remove
           </WithPending>

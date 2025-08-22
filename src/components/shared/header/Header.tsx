@@ -58,7 +58,7 @@ export default function Header() {
             id='primary-navigation'
             data-state={state}
             className={cn(
-              'top-navigation-height bg-card fixed left-0 z-100 flex w-full flex-col gap-2 overflow-auto border-b p-4 md:static md:h-auto md:translate-0 md:flex-row md:border-b-0 md:py-0 md:opacity-100',
+              'top-navigation-height bg-card fixed left-0 z-10 flex w-full flex-col gap-2 overflow-auto border-b p-4 md:static md:h-auto md:translate-0 md:flex-row md:border-b-0 md:py-0 md:opacity-100',
             )}
           >
             {navLinks.map((link) => {

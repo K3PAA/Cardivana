@@ -11,6 +11,7 @@ type TagsFieldDataProps = {
 }
 
 export default function TagsFieldData({ items }: TagsFieldDataProps) {
+  const tags = useFilterCollectionStore((state) => state.tags)
   const setTags = useFilterCollectionStore((state) => state.setTags)
   const handleValueChange = (checked: CheckedState, value: string) => {
     setTags(checked, value)
@@ -21,6 +22,7 @@ export default function TagsFieldData({ items }: TagsFieldDataProps) {
       label='Select relevant tags ?'
       items={items}
       onValueChange={handleValueChange}
+      checkedItems={tags}
     />
   )
 }

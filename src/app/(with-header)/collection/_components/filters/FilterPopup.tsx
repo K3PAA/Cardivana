@@ -1,21 +1,21 @@
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
+  AlertDialogDescription,
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
+
 import { Funnel } from 'lucide-react'
+import AuthorFilter from './AuthorFilter'
+import FavoriteFilter from './FavoriteFilter'
 import SortBySelect from './SortBySelect'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import CheckboxFieldset from './CheckboxFieldset'
 import TagsField from './TagsField'
+import TitleInput from './TitleInput'
 
 export default function FilterPopup() {
   return (
@@ -29,32 +29,19 @@ export default function FilterPopup() {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Filters and Sorting</AlertDialogTitle>
-
-          <SortBySelect />
-
-          <div className='my-2 *:not-first:mt-2'>
-            <Label htmlFor='search'>Simple input</Label>
-            <Input id='search' placeholder='Search...' />
-          </div>
-
-          <CheckboxFieldset
-            label='Lesson created by ?'
-            items={[
-              { label: 'by me', value: 'me' },
-              { label: 'by other people', value: 'other' },
-            ]}
-          />
-
-          <CheckboxFieldset
-            label='Show favorite lessons only ?'
-            items={[{ label: 'favorite only', value: 'favorite' }]}
-          />
-
-          <TagsField />
+          <AlertDialogDescription>
+            Filter your data so you can easier find what you are looking for.
+          </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Apply filters</AlertDialogAction>
+
+        <SortBySelect />
+        <TitleInput />
+        <AuthorFilter />
+        <FavoriteFilter />
+        <TagsField />
+
+        <AlertDialogFooter className='ml-auto'>
+          <AlertDialogAction>close</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

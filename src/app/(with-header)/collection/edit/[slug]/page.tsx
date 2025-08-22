@@ -1,6 +1,7 @@
 import { getUserLessonInfo } from '@/dal/lesson'
-import BackButton from '../../_components/BackButton'
+
 import EditForm from '../../_components/form/EditForm'
+import GoBackButton from '@/components/shared/GoBackButton'
 
 export default async function EditLesson({
   params,
@@ -37,7 +38,7 @@ export default async function EditLesson({
         <h1 className='mb-2 text-3xl font-bold'>
           Edit "{lessonData.data?.title}"
         </h1>
-        <BackButton />
+        <GoBackButton />
       </div>
       {formData && <EditForm defaultValues={formData} lessonId={lessonId} />}
     </main>

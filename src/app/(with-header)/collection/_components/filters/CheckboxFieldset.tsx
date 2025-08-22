@@ -15,12 +15,14 @@ type CheckboxFieldsetProps = {
   items: Item[]
   label: string
   onValueChange: (checked: CheckedState, value: string) => void
+  checkedItems?: string[]
 }
 
 export default function CheckboxFieldset({
   label,
   items,
   onValueChange,
+  checkedItems,
 }: CheckboxFieldsetProps) {
   const id = useId()
 
@@ -43,7 +45,11 @@ export default function CheckboxFieldset({
               onCheckedChange={(e) => {
                 onValueChange(e, item.value)
               }}
-              checked={item.defaultChecked}
+              checked={
+                checkedItems
+                  ? checkedItems.includes(item.value)
+                  : item.defaultChecked
+              }
               disabled={item.disabled}
             />
             <span

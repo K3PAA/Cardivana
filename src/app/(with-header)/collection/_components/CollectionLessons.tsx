@@ -21,32 +21,51 @@ type CollectionLessonsProps = {
 export default function CollectionLessons({ lessons }: CollectionLessonsProps) {
   const search = useFilterCollectionStore((state) => state.search)
   const tags = useFilterCollectionStore((state) => state.tags)
+  const sortingMethod = useFilterCollectionStore((state) => state.sortBy)
 
-  const filteredLessons = lessons.slice().filter((lesson) => {
-    const searchCorrect = lesson.title
-      .toLowerCase()
-      .startsWith(search.toLowerCase())
-    const tagsCorrect =
-      tags.length === 0 || tags.every((tag) => lesson.tags.includes(tag))
+  const filteredAndSortedLessons = lessons
+    .slice()
+    .filter((lesson) => {
+      const searchCorrect = lesson.title
+        .toLowerCase()
+        .startsWith(search.toLowerCase())
+      const tagsCorrect =
+        tags.length === 0 || tags.every((tag) => lesson.tags.includes(tag))
 
-    return searchCorrect && tagsCorrect
-  })
+      return searchCorrect && tagsCorrect
+    })
+    .sort((a, b) => {
+      if (sortingMethod === 'AZ') {
+        return a.title.localeCompare(b.title)
+      }
+
+      if (sortingMethod === 'ZA') {
+        return b.title.localeCompare(a.title)
+      }
+
+      if (sortingMethod === 'MOST_FLASHCARDS') {
+        return b.flashcards.length - a.flashcards.length
+      }
+
+      return a.createdAt.getTime() - b.createdAt.getTime()
+    })
 
   return (
     <>
-      {filteredLessons.length === 0 && lessons.length > 0 && (
+      {filteredAndSortedLessons.length === 0 && lessons.length > 0 && (
         <section className='p-8'>
           <h2 className='text-center text-3xl'>
             Modify your filters, no lesson matches your requirements
           </h2>
         </section>
       )}
+      <p>{tags}</p>
       <Accordion
         type='single'
         collapsible
         className='border-border w-full border-b'
       >
-        {filteredLessons.map((lesson) => (
+        {filteredAndSortedLessons.map((lesson) => (
           <AccordionItem
             value={lesson.id}
             key={lesson.id}
@@ -128,13 +147,20 @@ export default function CollectionLessons({ lessons }: CollectionLessonsProps) {
               </section>
 
               <section className='mt-4 flex flex-wrap justify-between gap-3'>
-                <RemoveLesson lessonId={lesson.id} />
+                <div className='flex gap-2'>
+                  <RemoveLesson lessonId={lesson.id} />
+                  <Button variant='secondary' asChild className='capitalize'>
+                    <Link href={`/print/${lesson.id}`}>print</Link>
+                  </Button>
+                </div>
 
                 <div className='flex gap-2'>
                   <Button variant='secondary' asChild>
                     <Link href={`/collection/edit/${lesson.id}`}>Edit</Link>
                   </Button>
-                  <Button>Start Lesson</Button>
+                  <Button asChild>
+                    <Link href={`/learn/${lesson.slug}`}>Start Lesson</Link>
+                  </Button>
                 </div>
               </section>
             </AccordionContent>

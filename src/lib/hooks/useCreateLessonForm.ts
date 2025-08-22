@@ -16,17 +16,17 @@ const defaultValues: CreateLessonForm = {
     {
       front: {
         text: 'Conceivable',
-        definition: 'That you can imagine or believe',
-        example: "It is conceivable that I'll see her tomorrow",
-        synonyms: [{ text: 'Possible' }],
-        antonyms: [{ text: 'Inconceivable' }],
+        definition: '',
+        example: '',
+        synonyms: [],
+        antonyms: [],
       },
       back: {
         text: 'Wyobrażalny ',
         definition: '',
         example: '',
-        synonyms: [{ text: 'Możliwy' }],
-        antonyms: [{ text: 'Niewyobrażalny' }],
+        synonyms: [],
+        antonyms: [],
       },
       difficulty: 'medium',
     },

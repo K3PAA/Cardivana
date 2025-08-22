@@ -12,7 +12,17 @@ import { Check } from 'lucide-react'
 
 export default function Pricing() {
   return (
-    <section className='py-16 md:py-32'>
+    <section
+      className='home py-16 md:py-32'
+      style={{
+        backgroundImage: `
+     linear-gradient(to right, rgba(71,85,105,0.15) 1px, transparent 1px),
+     linear-gradient(to bottom, rgba(71,85,105,0.15) 1px, transparent 1px),
+     radial-gradient(circle at 50% 60%, rgba(236,72,153,0.15) 0%, rgba(168,85,247,0.05) 40%, transparent 70%)
+   `,
+        backgroundSize: '40px 40px, 40px 40px, 100% 100%',
+      }}
+    >
       <div className='mx-auto max-w-6xl px-6'>
         <div className='mx-auto max-w-2xl space-y-6 text-center'>
           <h3 className='text-center text-4xl font-semibold lg:text-5xl'>

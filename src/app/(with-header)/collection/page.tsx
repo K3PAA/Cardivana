@@ -4,18 +4,16 @@ import { PlusIcon } from 'lucide-react'
 import { Suspense } from 'react'
 
 import Link from 'next/link'
-import CollectionLessons from './_components/CollectionLessons'
 
 import SidebarContent from '@/components/sidebar/SidebarContent'
 import SidebarSidepanel from '@/components/sidebar/SidebarSidepanel'
 import SidebarWrapper from '@/components/sidebar/SidebarWrapper'
-import CheckboxFieldset from './_components/filters/CheckboxFieldset'
+import AuthorFilter from './_components/filters/AuthorFilter'
 import FavoriteFilter from './_components/filters/FavoriteFilter'
 import FilterPopup from './_components/filters/FilterPopup'
 import SortBySelect from './_components/filters/SortBySelect'
 import TagsField from './_components/filters/TagsField'
 import TitleInput from './_components/filters/TitleInput'
-import AuthorFilter from './_components/filters/AuthorFilter'
 import GetCollectionLessons from './_components/GetCollectionLessons'
 
 export default function page() {
@@ -45,6 +43,7 @@ export default function page() {
 
       <SidebarSidepanel>
         <h2 className='my-2'>Filters and Sorting</h2>
+
         <SortBySelect />
         <TitleInput />
         <AuthorFilter />
