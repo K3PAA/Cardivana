@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Card, CardContent } from '@/components/ui/card'
 
 export default function Testimonials() {
   return (
@@ -25,11 +25,11 @@ export default function Testimonials() {
                 <p className='text-xl font-medium'>
                   Cardivana has completely transformed my learning journey.
                   Before, I struggled to retain more than 20 new words per week,
-                  but now I'm consistently learning 50+ words with better
+                  but now I&apos;m consistently learning 50+ words with better
                   long-term retention. The spaced repetition system and
                   collaborative features make the whole process engaging and
-                  efficient. It's not just about memorizing - it's about truly
-                  mastering the content.
+                  efficient. It&apos;s not just about memorizing - it&apos;s
+                  about truly mastering the content.
                 </p>
 
                 <div className='grid grid-cols-[auto_1fr] items-center gap-3'>
@@ -88,9 +88,9 @@ export default function Testimonials() {
             <CardContent className='h-full pt-6'>
               <blockquote className='grid h-full grid-rows-[1fr_auto] gap-6'>
                 <p>
-                  I can't recommend Cardivana enough! The spaced repetition and
-                  printing functionality make it ideal for me. It's exactly what
-                  I needed for my studies.
+                  I can&apos;t recommend Cardivana enough! The spaced repetition
+                  and printing functionality make it ideal for me. It&apos;s
+                  exactly what I needed for my studies.
                 </p>
 
                 <div className='grid [grid-template-columns:auto_1fr] items-center gap-3'>

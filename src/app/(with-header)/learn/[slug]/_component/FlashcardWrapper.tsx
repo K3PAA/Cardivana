@@ -69,7 +69,7 @@ export default async function FlashcardWrapper({
       </section>
 
       <div className='grid grid-cols-2 gap-5'>
-        <Button variant='destructive'>No, I don't know</Button>
+        <Button variant='destructive'>No, I don&apos;t know</Button>
         <Button>Yes, I know</Button>
       </div>
     </main>

@@ -9,11 +9,8 @@ import {
 import { Separator } from '@/components/ui/separator'
 
 import { RiGithubFill, RiGoogleFill } from '@remixicon/react'
-import RegisterForm from './_components/RegisterForm'
 import Link from 'next/link'
-import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
-import { auth } from '@/lib/auth'
+import RegisterForm from './_components/RegisterForm'
 
 export default async function page() {
   return (

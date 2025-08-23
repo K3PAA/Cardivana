@@ -1,14 +1,11 @@
 import z from 'zod'
-import {
-  flashcardSchema,
-  flashcardFaceSchema,
-} from './validation/flashcard-valid'
+import { flashcardFaceSchema } from './validation/flashcard-valid'
 import { registerFormSchema, loginFormSchema } from './validation/auth-valid'
 import { createLessonSchema } from './validation/lesson-valid'
 import { sortByOptions } from './data'
 import { InferSelectModel } from 'drizzle-orm'
-import { flashcard } from '@/db/schema/flashcard' // adjust path to your schema
-import { lesson } from '@/db/schema/lesson' // adjust path to your schema
+import { flashcard } from '@/db/schema/flashcard'
+import { lesson } from '@/db/schema/lesson'
 
 export type RegisterForm = z.infer<typeof registerFormSchema>
 export type LoginForm = z.infer<typeof loginFormSchema>

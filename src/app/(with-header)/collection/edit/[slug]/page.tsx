@@ -36,7 +36,7 @@ export default async function EditLesson({
     <main className='my-8 px-4 pt-4'>
       <div className='flex items-center justify-between'>
         <h1 className='mb-2 text-3xl font-bold'>
-          Edit "{lessonData.data?.title}"
+          Edit &quot;{lessonData.data?.title}&quot;
         </h1>
         <GoBackButton />
       </div>

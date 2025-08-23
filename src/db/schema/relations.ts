@@ -8,7 +8,7 @@ import {
 import { flashcard, userEntry } from './flashcard'
 import { relations } from 'drizzle-orm'
 
-export const userRelations = relations(user, ({ one, many }) => ({
+export const userRelations = relations(user, ({ many }) => ({
   lessons: many(lesson),
   flashcards: many(flashcard),
   entries: many(userEntry),

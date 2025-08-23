@@ -8,12 +8,11 @@ import { Textarea } from '@/components/ui/textarea'
 import { useEditLessonForm } from '@/lib/hooks/useEditLessonForm'
 
 import { EditLessonForm } from '@/lib/types'
-import { useRouter } from 'next/navigation'
-import FlashcardFieldArray from './flashcard/FlashcardFieldArray'
+import { EditFlashcardFieldArray } from './flashcard/FlashcardFieldArray'
 import FormFieldWrapper from './FormFieldWrapper'
 import PriceInputWrapper from './lesson/PriceInputWrapper'
-import TagFieldArray from './lesson/TagFieldArray'
-import VisibilitySelect from './lesson/VisibilitySelect'
+import { EditTagFieldArray } from './lesson/TagFieldArray'
+import { EditVisibilitySelect } from './lesson/VisibilitySelect'
 
 type EditFormProps = {
   defaultValues: EditLessonForm
@@ -65,7 +64,7 @@ export default function EditForm({ defaultValues, lessonId }: EditFormProps) {
         <FormField
           control={form.control}
           name='visibility'
-          render={({ field }) => <VisibilitySelect field={field} />}
+          render={({ field }) => <EditVisibilitySelect field={field} />}
         />
 
         <FormField
@@ -86,9 +85,12 @@ export default function EditForm({ defaultValues, lessonId }: EditFormProps) {
           )}
         />
 
-        <TagFieldArray tagFieldArray={tagFieldArray} control={form.control} />
+        <EditTagFieldArray
+          tagFieldArray={tagFieldArray}
+          control={form.control}
+        />
 
-        <FlashcardFieldArray
+        <EditFlashcardFieldArray
           flashcardFieldArray={flashcardFieldArray}
           control={form.control}
         />

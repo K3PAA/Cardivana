@@ -1,10 +1,9 @@
+import Wrapper from '@/components/shared/Wrapper'
 import { auth } from '@/lib/auth'
 import { headers } from 'next/headers'
 import { Suspense } from 'react'
 import EditCredentials from './_components/EditCredentials'
 import Stats from './_components/Stats'
-import Wrapper from '@/components/shared/Wrapper'
-import { sleep } from '@/lib/utils'
 
 export default async function page() {
   const session = await auth.api.getSession({

@@ -7,12 +7,11 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useCreateLessonForm } from '@/lib/hooks/useCreateLessonForm'
 
+import { CreateFlashcardFieldArray } from './flashcard/FlashcardFieldArray'
 import FormFieldWrapper from './FormFieldWrapper'
 import PriceInputWrapper from './lesson/PriceInputWrapper'
-import VisibilitySelect from './lesson/VisibilitySelect'
-import FlashcardFieldArray from './flashcard/FlashcardFieldArray'
-import TagFieldArray from './lesson/TagFieldArray'
-import { useRouter } from 'next/navigation'
+import { CreateTagFieldArray } from './lesson/TagFieldArray'
+import { CreateVisibilitySelect } from './lesson/VisibilitySelect'
 
 export default function CreateForm() {
   const { form, handleSubmit, isPending, tagFieldArray, flashcardFieldArray } =
@@ -60,7 +59,7 @@ export default function CreateForm() {
           <FormField
             control={form.control}
             name='visibility'
-            render={({ field }) => <VisibilitySelect field={field} />}
+            render={({ field }) => <CreateVisibilitySelect field={field} />}
           />
 
           <FormField
@@ -81,9 +80,12 @@ export default function CreateForm() {
             )}
           />
 
-          <TagFieldArray tagFieldArray={tagFieldArray} control={form.control} />
+          <CreateTagFieldArray
+            tagFieldArray={tagFieldArray}
+            control={form.control}
+          />
 
-          <FlashcardFieldArray
+          <CreateFlashcardFieldArray
             flashcardFieldArray={flashcardFieldArray}
             control={form.control}
           />

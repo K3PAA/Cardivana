@@ -52,8 +52,6 @@ export const getTagsFromUserLessons = async () => {
 }
 
 export const getLesson = async (slug: string) => {
-  const { user: activeUser } = await verifyUser()
-
   const lesson = await db.query.lesson.findFirst({
     where: (lesson, { eq }) => eq(lesson.slug, slug),
     columns: {},

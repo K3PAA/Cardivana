@@ -8,16 +8,7 @@ import {
 import FormFieldWrapper from '../../../_components/form/FormFieldWrapper'
 import { ControllerRenderProps } from 'react-hook-form'
 import { FormControl } from '@/components/ui/form'
-import { CreateLessonFormInput } from '@/lib/types'
-
-interface DifficultySelectProps {
-  field: ControllerRenderProps<
-    CreateLessonFormInput,
-    `flashcards.${number}.difficulty`
-  >
-  className?: string
-  options?: { value: string; label: string }[]
-}
+import { CreateLessonForm, EditLessonForm } from '@/lib/types'
 
 const defaultOptions = [
   { value: 'easy', label: 'Easy' },
@@ -27,11 +18,58 @@ const defaultOptions = [
   { value: 'extreme', label: 'Extreme' },
 ]
 
-export default function DifficultySelect({
+type CreateDifficultySelectProps = {
+  field: ControllerRenderProps<
+    CreateLessonForm,
+    `flashcards.${number}.difficulty`
+  >
+  className?: string
+  options?: { value: string; label: string }[]
+}
+
+export function CreateDifficultySelect({
   field,
   className = '',
   options = defaultOptions,
-}: DifficultySelectProps) {
+}: CreateDifficultySelectProps) {
+  return (
+    <FormFieldWrapper label='Difficulty' className={className}>
+      <Select
+        onValueChange={field.onChange}
+        defaultValue={field.value}
+        {...field}
+      >
+        <FormControl>
+          <SelectTrigger className='w-full'>
+            <SelectValue placeholder='difficulty' />
+          </SelectTrigger>
+        </FormControl>
+        <SelectContent>
+          {options.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </FormFieldWrapper>
+  )
+}
+
+type EditDifficultySelectProps = {
+  field: ControllerRenderProps<
+    EditLessonForm,
+    `flashcards.${number}.difficulty`
+  >
+  className?: string
+  options?: { value: string; label: string }[]
+}
+
+export function EditDifficultySelect({
+  field,
+  className = '',
+  options = defaultOptions,
+}: EditDifficultySelectProps) {
   return (
     <FormFieldWrapper label='Difficulty' className={className}>
       <Select

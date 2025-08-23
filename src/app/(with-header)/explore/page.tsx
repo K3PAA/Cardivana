@@ -17,7 +17,7 @@ export default function page() {
                 lessons
               </h1>
               <p className='text-muted-foreground text-sm'>
-                Find what interest's you.{' '}
+                Find what interest&apos;s you.{' '}
                 <span className='hidden sm:inline'>
                   Instead of creating lesson on your own use what other people
                   already created.

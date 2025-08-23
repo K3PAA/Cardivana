@@ -2,9 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useAction } from 'next-safe-action/hooks'
 import { useFieldArray, useForm } from 'react-hook-form'
 
-import { CreateLessonForm, EditLessonForm } from '@/lib/types'
-import { editLessonSchema } from '../validation/lesson-valid'
 import { editLessonAction } from '@/actions/lesson-action'
+import { EditLessonForm } from '@/lib/types'
+import { editLessonSchema } from '../validation/lesson-valid'
 
 export const useEditLessonForm = (
   defaultValues: EditLessonForm,

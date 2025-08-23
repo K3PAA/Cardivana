@@ -22,8 +22,8 @@ export default function Header() {
     setIsOpen((p) => {
       const value = !p
 
-      if (value) setState((p) => 'opened')
-      else setState((p) => 'closing')
+      if (value) setState('opened')
+      else setState('closing')
 
       return value
     })
@@ -45,7 +45,7 @@ export default function Header() {
     if (!isOpen) return
     setIsOpen(false)
     setState('closing')
-  }, [pathname])
+  }, [pathname, isOpen])
 
   return (
     <header className='bg-card border-border w-full border-b'>
